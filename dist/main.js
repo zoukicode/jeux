@@ -1,13 +1,13 @@
 "use strict";
-const box = document.querySelectorAll('.box');
-const titre = document.querySelector('h1');
-const body = document.querySelector('body');
-let tabe = [];
-let bien = 0;
-let level = 1;
-let isPlaying = false;
-const messageOver = "Game Over. Appuie sur Entrée pour recommencer.";
-document.addEventListener('keydown', (keyevent) => {
+var box = document.querySelectorAll('.box');
+var titre = document.querySelector('h1');
+var body = document.querySelector('body');
+var tabe = [];
+var bien = 0;
+var level = 1;
+var isPlaying = false;
+var messageOver = "Game Over. Appuie sur Entrée pour recommencer.";
+document.addEventListener('keydown', function (keyevent) {
     if (keyevent.key === 'Enter' && !isPlaying) {
         resetGame();
         isPlaying = true;
@@ -15,11 +15,11 @@ document.addEventListener('keydown', (keyevent) => {
         playSequence();
     }
 });
-box.forEach((element, index) => {
-    element.addEventListener('click', () => {
+box.forEach(function (element, index) {
+    element.addEventListener('click', function () {
         if (!isPlaying)
             return;
-        const expected = tabe[bien];
+        var expected = tabe[bien];
         if (element === expected) {
             bien++;
             if (bien === tabe.length) {
@@ -37,20 +37,20 @@ box.forEach((element, index) => {
 });
 function playSequence() {
     // Ajouter une nouvelle boîte aléatoire à la séquence
-    const aleatoire = Math.floor(Math.random() * box.length);
-    const newBox = box[aleatoire];
+    var aleatoire = Math.floor(Math.random() * box.length);
+    var newBox = box[aleatoire];
     tabe.push(newBox);
     // Montrer toute la séquence visuellement (une par une)
-    setTimeout(() => {
+    setTimeout(function () {
         newBox.style.boxShadow = '1px 3px 8px 10px white';
-        setTimeout(() => {
+        setTimeout(function () {
             newBox.style.boxShadow = 'none';
         }, 600);
     }, 800); // décalage pour chaque boîte
 }
 function GameOver() {
     flashBody();
-    titre.innerHTML = `<h1 class="text-red-700 font-lg">${messageOver}</h1>`;
+    titre.innerHTML = "<h1 class=\"text-red-700 font-lg\">".concat(messageOver, "</h1>");
     isPlaying = false;
     resetGame();
 }
@@ -60,10 +60,10 @@ function resetGame() {
     level = 1;
 }
 function flashBody() {
-    const interval = setInterval(() => {
+    var interval = setInterval(function () {
         body.classList.add('bg-red-300');
     }, 100);
-    setTimeout(() => {
+    setTimeout(function () {
         clearInterval(interval);
         body.classList.remove('bg-red-300');
     }, 500);

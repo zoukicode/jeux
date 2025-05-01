@@ -1,10 +1,14 @@
 {
   "compilerOptions": {
-    "target": "es6",
-    "module": "es6",
-    "outDir": "./dist",
-    "rootDir": "./src",
-    "strict": true
-  },
-  "include": ["src/**/*"]
+    "target": "es5",                        // Cible ES5 pour compatibilité avec la plupart des navigateurs
+    "module": "commonjs",                   // Module système
+    "strict": true,                         // Active toutes les vérifications strictes
+    "esModuleInterop": true,                // Permet l'importation des modules ES
+    "skipLibCheck": true,                   // Ignore la vérification des types dans les librairies
+    "forceConsistentCasingInFileNames": true, // Assure une casse cohérente des fichiers
+    "outDir": "./dist",                     // Répertoire de sortie des fichiers compilés
+    "rootDir": "./src",                     // Le répertoire d'entrée des fichiers TS
+    },
+  "include": ["src/**/*.ts"],
+  "exclude": ["node_modules"]
 }

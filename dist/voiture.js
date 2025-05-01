@@ -1,13 +1,13 @@
 "use strict";
-const voiture = document.querySelectorAll('.voiture');
-const boxs = document.querySelector('.box');
-const p = document.querySelector('p');
-const selecte = document.querySelector('select');
-let courserobot;
-const normale = 900;
-const moyen = 600;
-const rapide = 300;
-let time = 0;
+var voiture = document.querySelectorAll('.voiture');
+var boxs = document.querySelector('.box');
+var p = document.querySelector('p');
+var selecte = document.querySelector('select');
+var courserobot;
+var normale = 900;
+var moyen = 600;
+var rapide = 300;
+var time = 0;
 function niveau() {
     if (selecte.value === 'Moyen') {
         time = moyen;
@@ -19,19 +19,19 @@ function niveau() {
         time = normale;
     }
 }
-const robot = voiture[1];
-const voiture_utilisateur = voiture[0];
-let playing = false;
-document.addEventListener('keydown', (eventkey) => {
+var robot = voiture[1];
+var voiture_utilisateur = voiture[0];
+var playing = false;
+document.addEventListener('keydown', function (eventkey) {
     if (eventkey.key === 'Enter' && !playing) {
         p.innerText = '';
         playing = true;
-        robot.style.transform = `translateX(0px)`;
-        voiture_utilisateur.style.transform = `translateX(0px)`;
+        robot.style.transform = "translateX(0px)";
+        voiture_utilisateur.style.transform = "translateX(0px)";
         Game();
     }
 });
-const phrase = [
+var phrase = [
     "Ali pédale son vélo",
     "Je viens de construire ma propre maison",
     "Je sais nager",
@@ -46,24 +46,24 @@ const phrase = [
 ];
 function Game() {
     niveau();
-    let nombre_aleatoire = Math.floor(Math.random() * phrase.length);
-    const texte = phrase[nombre_aleatoire];
-    const largeur = boxs.getBoundingClientRect().width - 318;
-    const nombreDeLettres = texte.length;
-    const pasDeplacement = largeur / nombreDeLettres;
-    let deplace_robot = 0;
-    let deplace_utilisateur = 0;
-    let click = 0;
-    const spans = [];
-    for (let i = 0; i < texte.length; i++) {
-        const span = document.createElement('span');
+    var nombre_aleatoire = Math.floor(Math.random() * phrase.length);
+    var texte = phrase[nombre_aleatoire];
+    var largeur = boxs.getBoundingClientRect().width - 318;
+    var nombreDeLettres = texte.length;
+    var pasDeplacement = largeur / nombreDeLettres;
+    var deplace_robot = 0;
+    var deplace_utilisateur = 0;
+    var click = 0;
+    var spans = [];
+    for (var i = 0; i < texte.length; i++) {
+        var span = document.createElement('span');
         span.textContent = texte[i];
         p.appendChild(span);
         spans.push(span);
     }
     function deplacementRobot() {
         deplace_robot += pasDeplacement;
-        robot.style.transform = `translateX(${deplace_robot}px)`;
+        robot.style.transform = "translateX(".concat(deplace_robot, "px)");
         if (deplace_robot >= largeur) {
             clearInterval(courserobot);
             alert("Le robot a gagné !");
@@ -73,7 +73,7 @@ function Game() {
     courserobot = setInterval(deplacementRobot, time);
     function utilisateurAvance() {
         deplace_utilisateur += pasDeplacement;
-        voiture_utilisateur.style.transform = `translateX(${deplace_utilisateur}px)`;
+        voiture_utilisateur.style.transform = "translateX(".concat(deplace_utilisateur, "px)");
         console.log('nombre de pas:' + deplace_utilisateur + ' Largeur:' + largeur);
         if (Math.abs(deplace_utilisateur - largeur) < 1e-9) {
             clearInterval(courserobot);
@@ -84,8 +84,8 @@ function Game() {
     function ecoute(e) {
         if (!playing)
             return;
-        const attendu = texte[click];
-        const touche = e.key;
+        var attendu = texte[click];
+        var touche = e.key;
         if (touche === attendu) {
             spans[click].classList.add('lettre');
             click++;
